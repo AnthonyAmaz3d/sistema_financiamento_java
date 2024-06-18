@@ -5,9 +5,9 @@ package modelo;
  */
 
 public class Financiamento {
-    private double valorImovel;
-    private int prazoFinanciamento;
-    private double taxaJurosAnual;
+    protected double valorImovel;
+    protected int prazoFinanciamento;
+    protected double taxaJurosAnual;
 
     public double getValorImovel() {
         return this.valorImovel;
