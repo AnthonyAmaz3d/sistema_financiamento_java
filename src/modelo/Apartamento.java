@@ -6,8 +6,21 @@ package modelo;
 
 public class Apartamento extends Financiamento{
 
-    public Apartamento(double valorImovel, int prazoFinanciamentoAnos, double taxaJurosAnual) {
+    private int totalVagas;
+    private int numeroAndar;
+
+    public Apartamento(double valorImovel, int prazoFinanciamentoAnos, double taxaJurosAnual, int totalVagas, int numeroAndar) {
         super(valorImovel, prazoFinanciamentoAnos, taxaJurosAnual);
+        this.totalVagas = totalVagas;
+        this.numeroAndar = numeroAndar;
+    }
+
+    public int getTotalVagas() {
+        return totalVagas;
+    }
+
+    public int getNumeroAndar() {
+        return numeroAndar;
     }
 
     public double calcularTaxaMensal() {
