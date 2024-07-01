@@ -38,4 +38,9 @@ public class Apartamento extends Financiamento{
 
         return (valorImovel * taxaMensal)/ (1 - Math.pow(1 + taxaMensal, -mesesFinanciamento));
     }
+
+    @Override
+    public double calcularPagamentoTotal() {
+        return this.calcularPagamentoMensal() * this.prazoFinanciamento * 12;
+    }
 }

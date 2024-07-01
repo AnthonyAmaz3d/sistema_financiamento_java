@@ -17,8 +17,12 @@ public class Terreno extends Financiamento{
         return tipoZona;
     }
 
-    @Override
     public double calcularPagamentoMensal() {
-        return ((this.valorImovel / (this.prazoFinanciamento * 12)) * (1 + ((this.taxaJurosAnual / 100) / 12))) * 1.02;
+        return super.calcularPagamentoMensal() * 1.02;
+    }
+
+    @Override
+    public double calcularPagamentoTotal() {
+        return this.calcularPagamentoMensal() * this.prazoFinanciamento * 12;
     }
 }

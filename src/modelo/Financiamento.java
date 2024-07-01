@@ -27,9 +27,9 @@ public abstract class Financiamento {
         this.taxaJurosAnual = taxaJurosAnual;
     }
 
-    public abstract double calcularPagamentoMensal();
-
-    public double calcularPagamentoTotal() {
-        return this.calcularPagamentoMensal() * this.prazoFinanciamento * 12;
+    public double calcularPagamentoMensal() {
+        return (this.valorImovel / (this.prazoFinanciamento * 12)) * (1 + ((this.taxaJurosAnual / 100) / 12));
     }
+
+    public abstract double calcularPagamentoTotal();
 }
