@@ -4,7 +4,13 @@
 
 package modelo;
 
-public class Apartamento extends Financiamento{
+import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
+
+public class Apartamento extends Financiamento implements Serializable {
+    Locale localeBR = new Locale("pt", "BR");
+    NumberFormat dinheiro = NumberFormat.getCurrencyInstance(localeBR);
 
     private int totalVagas;
     private int numeroAndar;
@@ -42,5 +48,16 @@ public class Apartamento extends Financiamento{
     @Override
     public double calcularPagamentoTotal() {
         return this.calcularPagamentoMensal() * this.prazoFinanciamento * 12;
+    }
+
+    @Override
+    public String toString() {
+        return "--- Informações sobre o financiamento do Apartamento ---" + "\n" +
+                "- Valor do apartamento (imovel) = " + dinheiro.format(valorImovel) + "\n" +
+                "- Taxa de Juros Anual = " + taxaJurosAnual + "%" + "\n" +
+                "- Prazo do Financiamento = " + prazoFinanciamento + " anos" + "\n" +
+                "- Total de Vagas na garagem = " + totalVagas + "\n" +
+                "- Numero do Andar = " + numeroAndar + "\n" +
+                "-----------------------------------------------------";
     }
 }

@@ -1,10 +1,12 @@
 package modelo;
 
+import java.io.Serializable;
+
 /**
  * @author Anthony.Amaz3d
  */
 
-public abstract class Financiamento {
+public abstract class Financiamento implements Serializable {
     protected double valorImovel;
     protected int prazoFinanciamento;
     protected double taxaJurosAnual;

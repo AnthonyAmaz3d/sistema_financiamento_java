@@ -6,7 +6,13 @@ package modelo;
 
 import util.AcrescimoException;
 
-public class Casa extends Financiamento {
+import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
+
+public class Casa extends Financiamento implements Serializable {
+    Locale localeBR = new Locale("pt", "BR");
+    NumberFormat dinheiro = NumberFormat.getCurrencyInstance(localeBR);
 
     private double areaConstruida;
     private double areaTerreno;
@@ -25,9 +31,10 @@ public class Casa extends Financiamento {
         return areaTerreno;
     }
 
+
     public void verificaAcrescimoMaiorQueJuros(double juros, double acrescimo) throws AcrescimoException {
         if (acrescimo > juros) {
-            throw new AcrescimoException("O Acrescimo é maior que o juros.");
+            throw new AcrescimoException("O Acrescimo é maior que o juros. Mudando valor de acréscimo.");
         }
     }
 
@@ -40,8 +47,18 @@ public class Casa extends Financiamento {
             System.out.println("Erro ao calcular pagamento Mensal: " + e.getMessage());
             valorDoAcrescimo = valorDojuros;
         }
-
         return super.calcularPagamentoMensal() + valorDoAcrescimo;
+    }
+
+    @Override
+    public String toString() {
+        return "--- Informações sobre o financiamento da Casa ---" + "\n" +
+                "- Valor da Casa (Imovel) = " + dinheiro.format(valorImovel) + "\n" +
+                "- Taxa de Juros Anual = " + taxaJurosAnual + "%" + "\n" +
+                "- Prazo do Financiamento = " + prazoFinanciamento + " anos" + "\n" +
+                "- Área Construida = " + areaConstruida + " m2" + "\n" +
+                "- Área do Terreno = " + areaTerreno + " m2" + "\n" +
+                "-----------------------------------------------------";
     }
 
     @Override

@@ -4,7 +4,13 @@
 
 package modelo;
 
-public class Terreno extends Financiamento{
+import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
+
+public class Terreno extends Financiamento implements Serializable {
+    Locale localeBR = new Locale("pt", "BR");
+    NumberFormat dinheiro = NumberFormat.getCurrencyInstance(localeBR);
 
     private String tipoZona;
 
@@ -24,5 +30,15 @@ public class Terreno extends Financiamento{
     @Override
     public double calcularPagamentoTotal() {
         return this.calcularPagamentoMensal() * this.prazoFinanciamento * 12;
+    }
+
+    @Override
+    public String toString() {
+        return "--- Informações sobre o financiamento do Terreno ---" + "\n" +
+                "- Valor do Terreno (imovel) = " + dinheiro.format(valorImovel) + "\n" +
+                "- Taxa de Juros Anual = " + taxaJurosAnual + "%" +"\n" +
+                "- Prazo do Financiamento = " + prazoFinanciamento + " anos" + "\n" +
+                "- Tipo da Zona = " + tipoZona  + "\n" +
+                "-----------------------------------------------------";
     }
 }
