@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class Terreno extends Financiamento implements Serializable {
+public class Terreno extends Financiamento {
     Locale localeBR = new Locale("pt", "BR");
     NumberFormat dinheiro = NumberFormat.getCurrencyInstance(localeBR);
 

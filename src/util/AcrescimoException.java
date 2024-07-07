@@ -4,7 +4,9 @@
 
 package util;
 
-public class AcrescimoException extends Exception{
+import java.io.Serializable;
+
+public class AcrescimoException extends Exception {
 
     public AcrescimoException(String message) {
         super(message);

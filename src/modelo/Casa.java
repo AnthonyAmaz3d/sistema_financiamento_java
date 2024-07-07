@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class Casa extends Financiamento implements Serializable {
+public class Casa extends Financiamento {
     Locale localeBR = new Locale("pt", "BR");
     NumberFormat dinheiro = NumberFormat.getCurrencyInstance(localeBR);
 
@@ -31,23 +31,36 @@ public class Casa extends Financiamento implements Serializable {
         return areaTerreno;
     }
 
+    private boolean acrescimoAjustado = false;
+    private static boolean mensagemErroApareceu = false;
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
 
     public void verificaAcrescimoMaiorQueJuros(double juros, double acrescimo) throws AcrescimoException {
         if (acrescimo > juros) {
-            throw new AcrescimoException("O Acrescimo é maior que o juros. Mudando valor de acréscimo.");
+            throw new AcrescimoException("O Acrescimo é maior que o juros. Mudando valor do acréscimo.");
         }
     }
 
     public double calcularPagamentoMensal(){
-        double valorDojuros = super.calcularPagamentoMensal() - (this.valorImovel / (this.prazoFinanciamento * 12));
+        double pagamentoMensal = super.calcularPagamentoMensal();
+        double valorDojuros = pagamentoMensal - (this.valorImovel / (this.prazoFinanciamento * 12));
         double valorDoAcrescimo = 80;
-        try {
-            verificaAcrescimoMaiorQueJuros(valorDojuros, valorDoAcrescimo);
-        } catch (AcrescimoException e) {
-            System.out.println("Erro ao calcular pagamento Mensal: " + e.getMessage() + "\n");
+        if (!acrescimoAjustado) {
+            try {
+                verificaAcrescimoMaiorQueJuros(valorDojuros, valorDoAcrescimo);
+            } catch (AcrescimoException e) {
+                if (!mensagemErroApareceu) {
+                    System.out.println( ANSI_RED + "Erro ao calcular pagamento Mensal: " + e.getMessage() + ANSI_RESET + "\n");
+                    mensagemErroApareceu = true;
+                }
+                valorDoAcrescimo = valorDojuros;
+                acrescimoAjustado = true;
+            }
+        } else {
             valorDoAcrescimo = valorDojuros;
         }
-        return super.calcularPagamentoMensal() + valorDoAcrescimo;
+        return pagamentoMensal + valorDoAcrescimo;
     }
 
     @Override
