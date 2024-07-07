@@ -96,7 +96,7 @@ public class InterfaceUsuario {
     public int definirTotalVagas() {
         while (true) {
             try {
-                System.out.println("Digite o número total de vagas: (apenas valores positivos) ");
+                System.out.println("Digite o número total de vagas do estacionamento do apartamento: (apenas valores positivos) ");
                 Scanner s = new Scanner(System.in);
                 int n = s.nextInt();
                 if (n < 0 || n > 100) {
@@ -113,7 +113,7 @@ public class InterfaceUsuario {
     public int definirAndarApartamento() {
         while (true) {
             try {
-                System.out.println("Digite o andar do Apartamento (apenas valores positivos) ");
+                System.out.println("Digite o andar do Apartamento: (apenas valores positivos) ");
                 Scanner s = new Scanner(System.in);
                 int n = s.nextInt();
                 if (n < 0 || n > 100) {

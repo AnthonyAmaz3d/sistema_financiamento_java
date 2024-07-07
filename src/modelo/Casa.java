@@ -44,7 +44,7 @@ public class Casa extends Financiamento implements Serializable {
         try {
             verificaAcrescimoMaiorQueJuros(valorDojuros, valorDoAcrescimo);
         } catch (AcrescimoException e) {
-            System.out.println("Erro ao calcular pagamento Mensal: " + e.getMessage());
+            System.out.println("Erro ao calcular pagamento Mensal: " + e.getMessage() + "\n");
             valorDoAcrescimo = valorDojuros;
         }
         return super.calcularPagamentoMensal() + valorDoAcrescimo;
@@ -53,11 +53,13 @@ public class Casa extends Financiamento implements Serializable {
     @Override
     public String toString() {
         return "--- Informações sobre o financiamento da Casa ---" + "\n" +
-                "- Valor da Casa (Imovel) = " + dinheiro.format(valorImovel) + "\n" +
+                "- Valor da Casa (Imovel) = " + dinheiro.format(this.valorImovel) + "\n" +
                 "- Taxa de Juros Anual = " + taxaJurosAnual + "%" + "\n" +
                 "- Prazo do Financiamento = " + prazoFinanciamento + " anos" + "\n" +
                 "- Área Construida = " + areaConstruida + " m2" + "\n" +
                 "- Área do Terreno = " + areaTerreno + " m2" + "\n" +
+                "- Valor pagamento mensal =  " + dinheiro.format(this.calcularPagamentoMensal()) + "\n" +
+                "- Valor do pagamento total = " + dinheiro.format(this.calcularPagamentoTotal()) + "\n" +
                 "-----------------------------------------------------";
     }
 

@@ -59,7 +59,7 @@ public class Main {
 
         ObjectOutputStream outputStream = null;
         try {
-            outputStream = new ObjectOutputStream(new FileOutputStream("financiamento.test"));
+            outputStream = new ObjectOutputStream(new FileOutputStream("financiamento.txt"));
 
             outputStream.writeObject(casa1);
             outputStream.writeObject(casa2);
@@ -75,7 +75,7 @@ public class Main {
 
         ObjectInputStream inputStream = null;
         try {
-            inputStream = new ObjectInputStream(new FileInputStream("financiamento.test"));
+            inputStream = new ObjectInputStream(new FileInputStream("financiamento.txt"));
 
             Object object = null;
             while ((object = inputStream.readObject()) != null) {
@@ -99,9 +99,10 @@ public class Main {
 
         ObjectOutputStream outputStream1 = null;
         try {
-            outputStream1 = new ObjectOutputStream(new FileOutputStream("listafinanciamento.test"));
+            outputStream1 = new ObjectOutputStream(new FileOutputStream("listafinanciamento.ser"));
 
             outputStream1.writeObject(listaDeFinanciamentos);
+            System.out.println("Dados que foram serializados salvo em listafinanciamento.ser \n");
 
             outputStream1.flush();
             outputStream1.close();
@@ -109,14 +110,13 @@ public class Main {
             e.printStackTrace();
         }
 
-        try (ObjectInputStream inputStream1 = new ObjectInputStream(new FileInputStream("listafinanciamento.test"))) {
-            for (Financiamento f : listaDeFinanciamentos) {
-                System.out.println("Valor de pagamento mensal = " + dinheiro.format(f.calcularPagamentoMensal()) + "\n" +
-                        "Valor de pagamento total = " + dinheiro.format(f.calcularPagamentoTotal()) + "\n");
-            }
+        ArrayList<Financiamento> financiamentosDesserializados = null;
+        try (ObjectInputStream inputStream1 = new ObjectInputStream(new FileInputStream("listafinanciamento.ser"))) {
+            financiamentosDesserializados = (ArrayList<Financiamento>) inputStream1.readObject();
+            System.out.println("Dados desserializados: " + financiamentosDesserializados);
         } catch (EOFException e) {
             System.out.println("Fim do arquivo de leitura!");
-        } catch ( IOException e) {
+        } catch ( IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 

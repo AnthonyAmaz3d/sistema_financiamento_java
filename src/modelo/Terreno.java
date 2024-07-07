@@ -35,10 +35,12 @@ public class Terreno extends Financiamento implements Serializable {
     @Override
     public String toString() {
         return "--- Informações sobre o financiamento do Terreno ---" + "\n" +
-                "- Valor do Terreno (imovel) = " + dinheiro.format(valorImovel) + "\n" +
+                "- Valor do Terreno (imovel) = " + dinheiro.format(this.valorImovel) + "\n" +
                 "- Taxa de Juros Anual = " + taxaJurosAnual + "%" +"\n" +
                 "- Prazo do Financiamento = " + prazoFinanciamento + " anos" + "\n" +
                 "- Tipo da Zona = " + tipoZona  + "\n" +
+                "- Valor do pagamento mensal = " + dinheiro.format(this.calcularPagamentoMensal()) + "\n" +
+                "- Valor do pagamento total = " + dinheiro.format(this.calcularPagamentoTotal()) + "\n" +
                 "-----------------------------------------------------";
     }
 }

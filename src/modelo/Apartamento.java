@@ -58,6 +58,8 @@ public class Apartamento extends Financiamento implements Serializable {
                 "- Prazo do Financiamento = " + prazoFinanciamento + " anos" + "\n" +
                 "- Total de Vagas na garagem = " + totalVagas + "\n" +
                 "- Numero do Andar = " + numeroAndar + "\n" +
+                "- Valor do pagamento mensal = " + dinheiro.format(calcularPagamentoMensal()) + "\n" +
+                "- Valor do pagemento total = " + dinheiro.format(calcularPagamentoTotal()) + "\n" +
                 "-----------------------------------------------------";
     }
 }
