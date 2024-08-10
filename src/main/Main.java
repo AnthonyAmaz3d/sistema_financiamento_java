@@ -65,6 +65,7 @@ public class Main implements Serializable {
 
         FuncoesSecundarias.lerSerializado("listafinanciamentos.ser");
 
+
         System.out.println("Valor de todos os imoveis: " + dinheiro.format(valor) + "\n" +
                 "Valor de todos os imoveis financiado: " + dinheiro.format(valorTotalFinanciamento));
     }
